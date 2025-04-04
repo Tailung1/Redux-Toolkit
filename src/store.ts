@@ -1,4 +1,4 @@
-import { Action, createStore } from "redux";
+import { Action, combineReducers, createStore } from "redux";
 // import { configureStore } from "@reduxjs/toolkit";
 
 const accountInitialState = {
@@ -99,6 +99,11 @@ function customerRedcuer(
 
 export const store = createStore(accountReducer);
 
+const rootReducer = combineReducers({
+  account: accountReducer,
+  custom: customerRedcuer,
+});
+
 function deposit(amount: number): depositAction {
   return { type: "account/deposit", payload: amount };
 }
@@ -116,6 +121,20 @@ function requestLoan(
 }
 function payLoan(): payLoanAction {
   return { type: "account/payLoan" };
+}
+
+function createCustomer(fullName: string, nationalID: string) {
+  return {
+    type: "customer/createCustomer",
+    payload: {
+      fullName,
+      nationalID,
+      createdAT: new Date(),
+    },
+  };
+}
+function changeCustomerName(fullName: string) {
+  return { type: "customer/changeCustomerName", payload: fullName };
 }
 
 store.dispatch(deposit(2999));

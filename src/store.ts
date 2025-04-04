@@ -1,10 +1,15 @@
 import { Action, createStore } from "redux";
 // import { configureStore } from "@reduxjs/toolkit";
 
-const initialState = {
+const accountInitialState = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
+};
+const customerInitialState = {
+  fullName: "",
+  nationalID: "",
+  createdAt: "",
 };
 
 interface depositAction extends Action {
@@ -26,15 +31,32 @@ interface payLoanAction extends Action {
   type: "account/payLoan";
 }
 
-type actionTypes =
+interface createCustomerAction extends Action {
+  type: "customer/createCustomer";
+  payload: {
+    fullName: string;
+    nationalID: string;
+    createdAT: string;
+  };
+}
+interface changeCustomerNameAction extends Action {
+  type: "customer,changeCustomerName";
+  payload: string;
+}
+
+type accountActionTypes =
   | depositAction
   | withdrawAction
   | requestLoanAction
   | payLoanAction;
 
+type customerActionsTypes =
+  | createCustomerAction
+  | changeCustomerNameAction;
+
 export default function accountReducer(
-  state = initialState,
-  action: actionTypes
+  state = accountInitialState,
+  action: accountActionTypes
 ) {
   switch (action.type) {
     case "account/deposit":
@@ -59,6 +81,22 @@ export default function accountReducer(
       return state;
   }
 }
+
+function customerRedcuer(
+  state = customerInitialState,
+  action: customerActionsTypes
+) {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+        nationalId: action.payload.nationalID,
+        createdAT: action.payload.createdAT,
+      };
+  }
+}
+
 export const store = createStore(accountReducer);
 
 function deposit(amount: number): depositAction {
@@ -79,3 +117,6 @@ function requestLoan(
 function payLoan(): payLoanAction {
   return { type: "account/payLoan" };
 }
+
+store.dispatch(deposit(2999));
+console.log(store.getState());

@@ -40,7 +40,7 @@ interface createCustomerAction extends Action {
   };
 }
 interface changeCustomerNameAction extends Action {
-  type: "customer,changeCustomerName";
+  type: "customer/changeCustomerName";
   payload: string;
 }
 
@@ -94,6 +94,8 @@ function customerRedcuer(
         nationalId: action.payload.nationalID,
         createdAT: action.payload.createdAT,
       };
+    case "customer/changeCustomerName":
+      return { ...state, fullName: action.payload };
   }
 }
 
@@ -123,17 +125,22 @@ function payLoan(): payLoanAction {
   return { type: "account/payLoan" };
 }
 
-function createCustomer(fullName: string, nationalID: string) {
+function createCustomer(
+  fullName: string,
+  nationalID: string
+): createCustomerAction {
   return {
     type: "customer/createCustomer",
     payload: {
       fullName,
       nationalID,
-      createdAT: new Date(),
+      createdAT: new Date().toISOString(),
     },
   };
 }
-function changeCustomerName(fullName: string) {
+function changeCustomerName(
+  fullName: string
+): changeCustomerNameAction {
   return { type: "customer/changeCustomerName", payload: fullName };
 }
 

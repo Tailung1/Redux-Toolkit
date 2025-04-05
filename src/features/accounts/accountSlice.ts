@@ -1,7 +1,12 @@
 import { Action } from "redux";
 
+interface IInitalState {
+balance:number,
+loan:number,
+loanPurpose:string
+}
 
-const accountInitialState = {
+const accountInitialState: IInitalState = {
   balance: 0,
   loan: 0,
   loanPurpose: "",

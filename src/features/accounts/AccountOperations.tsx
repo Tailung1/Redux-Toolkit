@@ -88,14 +88,26 @@ export default function AccountOperations() {
         </button>
       </div>
       <div style={{ display: "flex", gap: "10px" }}>
-        <div style={{ display: "flex", gap: "10px",alignItems:"center" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+          }}
+        >
           <label htmlFor=''>Loan Amount</label>
           <input
             type='number'
             onChange={(e) => setLoanAmount(+e.target.value)}
           />
         </div>
-        <div style={{ display: "flex", gap: "10px",alignItems:"center" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+          }}
+        >
           {" "}
           <label htmlFor=''>Loan Purpose</label>
           <input

@@ -15,7 +15,7 @@ export default function ShowBalance() {
 
   return (
     <div>
-      <h2>{formatCurrency(balance as number)}</h2>
+      <h1>{formatCurrency(balance as number)}</h1>
     </div>
   );
 }

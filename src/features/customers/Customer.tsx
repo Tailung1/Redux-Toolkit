@@ -7,7 +7,7 @@ export default function Customer() {
   );
   return (
     <div>
-      <h2>Welcome,{costumerName as string}</h2>
+      <h1>Welcome,{costumerName as string}</h1>
     </div>
   );
 }

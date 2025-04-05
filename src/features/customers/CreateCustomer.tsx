@@ -15,18 +15,15 @@ export default function CreateCustomer() {
   console.log(customer);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if(!fullName || ! nationalID) return
+    if (!fullName || !nationalID) return;
     dispatch(createCustomer(fullName, nationalID));
   };
   return (
-    <div>
+    <div style={{ justifyContent: "center", alignItems: "center" }}>
       <form
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "600px",
           gap: "10px",
         }}
         onSubmit={handleSubmit}

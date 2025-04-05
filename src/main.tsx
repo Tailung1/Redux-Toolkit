@@ -8,10 +8,8 @@ import Customer from "./features/customers/Customer.tsx";
 import ShowBalance from "./features/accounts/ShowBalance.tsx";
 import store, { rootReducer } from "./store.ts";
 
-
 const customer = useSelector((store: rootReducer) => store.customer);
 createRoot(document.getElementById("root")!).render(
-    
   <StrictMode>
     <Provider store={store}>
       <CreateCustomer />

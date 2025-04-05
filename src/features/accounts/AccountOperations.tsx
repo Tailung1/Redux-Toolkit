@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { deposit } from "./accountSlice";
 import { withdraw } from "./accountSlice";
+import { requestLoan } from "./accountSlice";
 
 export default function AccountOperations() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,34 +19,55 @@ export default function AccountOperations() {
   const [currency, setCurrency] = useState<string>("");
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "10px",
+      }}
+    >
       <div>
-        <select
-          value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
-        >
-          <option value={"USD"}>USD</option>
-          <option value={"EUR"}>EUR</option>
-          <option value={"GBP"}>GBP</option>
-        </select>
-        <input
-          value={depositAmount}
-          type='number'
-          onChange={(e) => setDepositAmount(+e.target.value)}
-        />
-        <button
-          onClick={() => {
-            if (!depositAmount) {
-              return;
-            } else {
-              dispatch(deposit(+depositAmount)), setDepositAmount("");
-            }
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          Deposit
-        </button>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value={"USD"}>USD</option>
+            <option value={"EUR"}>EUR</option>
+            <option value={"GBP"}>GBP</option>
+          </select>{" "}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label>Deposit</label>
+            <input
+              value={depositAmount}
+              type='number'
+              onChange={(e) => setDepositAmount(+e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              if (!depositAmount) {
+                return;
+              } else {
+                dispatch(deposit(+depositAmount)),
+                  setDepositAmount("");
+              }
+            }}
+          >
+            Deposit
+          </button>
+        </div>
       </div>
       <div>
+        <label htmlFor=''>Withdraw</label>
         <input
           type='text'
           value={withdrawAmount}
@@ -65,16 +87,35 @@ export default function AccountOperations() {
           Withdraw
         </button>
       </div>
-      <div>
-        <input
-          type='number'
-          onChange={(e) => setLoanAmount(+e.target.value)}
-        />
-        <input
-          type='text'
-          onChange={(e) => setLoanPurpose(e.target.value)}
-        />
-        <button>Request Loan</button>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <div style={{ display: "flex", gap: "10px",alignItems:"center" }}>
+          <label htmlFor=''>Loan Amount</label>
+          <input
+            type='number'
+            onChange={(e) => setLoanAmount(+e.target.value)}
+          />
+        </div>
+        <div style={{ display: "flex", gap: "10px",alignItems:"center" }}>
+          {" "}
+          <label htmlFor=''>Loan Purpose</label>
+          <input
+            type='text'
+            onChange={(e) => setLoanPurpose(e.target.value)}
+          />
+        </div>
+        <button
+          onClick={() => {
+            if (!loanAmount || !loanPurpose) {
+              return;
+            } else {
+              dispatch(requestLoan(+loanAmount, loanPurpose));
+              setLoanAmount("");
+              setLoanPurpose("");
+            }
+          }}
+        >
+          Request Loan
+        </button>
       </div>
       <button>Pay loan</button>
     </div>

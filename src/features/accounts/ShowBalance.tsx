@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { rootReducer } from "../../store";
+import { rootReducerType } from "../../store";
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -10,7 +10,7 @@ function formatCurrency(value: number) {
 
 export default function ShowBalance() {
   const balance = useSelector(
-    (store: rootReducer) => store.account?.balance
+    (store: rootReducerType) => store.account?.balance
   );
 
   return (

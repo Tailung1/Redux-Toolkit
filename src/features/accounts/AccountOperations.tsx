@@ -16,7 +16,7 @@ export default function AccountOperations() {
   >("");
   const [loanAmount, setLoanAmount] = useState<number | string>("");
   const [loanPurpose, setLoanPurpose] = useState<string>("");
-  const [currency, setCurrency] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("USD");
 
   return (
     <div
@@ -57,7 +57,7 @@ export default function AccountOperations() {
               if (!depositAmount) {
                 return;
               } else {
-                dispatch(deposit(+depositAmount)),
+                dispatch(deposit(+depositAmount,currency)),
                   setDepositAmount("");
               }
             }}

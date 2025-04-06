@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { rootReducer } from "../../store";
+import { rootReducerType } from "../../store";
 
 export default function Customer() {
   const costumerName = useSelector(
-    (store: rootReducer) => store.customer.fullName
+    (store: rootReducerType) => store.customer.fullName
   );
   return (
     <div>

@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { rootReducer } from "../../store";
+import { rootReducerType } from "../../store";
 import { useState } from "react";
 import { createCustomer } from "./customerSlice";
 
 export default function CreateCustomer() {
   const dispatch = useDispatch<AppDispatch>();
   const customer = useSelector(
-    (store: rootReducer) => store.customer
+    (store: rootReducerType) => store.customer
   );
   const [fullName, setFullName] = useState("");
   const [nationalID, setNationalID] = useState("");

@@ -1,6 +1,5 @@
 import { Action } from "redux";
 
-
 const customerInitialState = {
   fullName: "",
   nationalID: "",
@@ -24,44 +23,43 @@ type customerActionsTypes =
   | createCustomerAction
   | changeCustomerNameAction;
 
+export default function customerRedcuer(
+  state = customerInitialState,
+  action: customerActionsTypes
+) {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+        nationalID: action.payload.nationalID,
+        createdAT: action.payload.createdAT,
+      };
+    case "customer/changeCustomerName":
+      return { ...state, fullName: action.payload };
+    default:
+      return state;
+  }
+}
 
- export   default   function customerRedcuer(
-    state = customerInitialState,
-    action: customerActionsTypes
-  ) {
-    switch (action.type) {
-      case "customer/createCustomer":
-        return {
-          ...state,
-          fullName: action.payload.fullName,
-          nationalID: action.payload.nationalID,
-          createdAT: action.payload.createdAT,
-        };
-      case "customer/changeCustomerName":
-        return { ...state, fullName: action.payload };
-      default:
-        return state;
-    }
-  }
-
-   export function createCustomer(
-    fullName: string,
-    nationalID: string
-  ): createCustomerAction {
-    return {
-      type: "customer/createCustomer",
-      payload: {
-        fullName,
-        nationalID,
-        createdAT: new Date().toISOString(),
-      },
-    };
-  }
-   export function changeCustomerName(
-    fullName: string
-  ): changeCustomerNameAction {
-    return {
-      type: "customer/changeCustomerName",
-      payload: { fullName },
-    };
-  }
+export function createCustomer(
+  fullName: string,
+  nationalID: string
+): createCustomerAction {
+  return {
+    type: "customer/createCustomer",
+    payload: {
+      fullName,
+      nationalID,
+      createdAT: new Date().toISOString(),
+    },
+  };
+}
+export function changeCustomerName(
+  fullName: string
+): changeCustomerNameAction {
+  return {
+    type: "customer/changeCustomerName",
+    payload: { fullName },
+  };
+}

@@ -6,11 +6,11 @@ import AccountOperations from "./features/accounts/AccountOperations.tsx";
 import CreateCustomer from "./features/customers/CreateCustomer.tsx";
 import Customer from "./features/customers/Customer.tsx";
 import ShowBalance from "./features/accounts/ShowBalance.tsx";
-import { rootReducer } from "./store.ts";
+import { rootReducerType } from "./store.ts";
 
 function App() {
   const customer = useSelector(
-    (store: rootReducer) => store.customer
+    (store: rootReducerType) => store.customer
   );
   return (
     <>

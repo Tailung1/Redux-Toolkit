@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { AppDispatch } from "../../store";
+import { AppDispatch, rootReducerType } from "../../store";
 import { deposit } from "./accountSlice";
 import { withdraw } from "./accountSlice";
 import { requestLoan } from "./accountSlice";
 
 export default function AccountOperations() {
+    const isLoading=useSelector((store:rootReducerType)=>store.account.isLoading)
   const dispatch = useDispatch<AppDispatch>();
   const [depositAmount, setDepositAmount] = useState<number | string>(
     ""
@@ -53,16 +55,17 @@ export default function AccountOperations() {
             />
           </div>
           <button
+        disabled={isLoading}
             onClick={() => {
               if (!depositAmount) {
                 return;
               } else {
-                dispatch(deposit(+depositAmount,currency)),
+                dispatch(deposit(+depositAmount, currency)),
                   setDepositAmount("");
               }
             }}
           >
-            Deposit
+            {isLoading ? "Converting..." : "Convert"}
           </button>
         </div>
       </div>

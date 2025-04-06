@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 import { AppDispatch } from "../../store";
-import {rootReducerType} from "../../store"
+import { rootReducerType } from "../../store";
 
 type ThunkResult = ThunkAction<
   void,
@@ -66,6 +66,7 @@ export default function accountReducer(
       return {
         ...state,
         balance: state.balance + action.payload.amount,
+        isLoading:false
       };
     case "account/withdraw":
       if (action.payload > state.balance) return state;
@@ -93,7 +94,7 @@ export default function accountReducer(
 export function deposit(
   amount: number,
   currency: string
-):  depositAction | ThunkResult  {
+): depositAction | ThunkResult {
   if (currency === "USD")
     return {
       type: "account/deposit",
@@ -102,9 +103,7 @@ export function deposit(
         currency,
       },
     };
-  return async function (
-    dispatch: AppDispatch
-  ){
+  return async function (dispatch: AppDispatch) {
     dispatch({ type: "account/isLoading" });
     const response = await fetch(
       `https://api.frankfurter.dev/v1/latest?base=${currency}&symbols=USD`

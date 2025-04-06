@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { AppDispatch, rootReducerType } from "../../store";
-import { deposit } from "./accountSlice";
+import { depositAsync } from "./accountSlice";
 import { withdraw } from "./accountSlice";
 import { requestLoan } from "./accountSlice";
 
@@ -60,7 +60,7 @@ export default function AccountOperations() {
               if (!depositAmount) {
                 return;
               } else {
-                dispatch(deposit(+depositAmount, currency)),
+                dispatch(depositAsync(+depositAmount, currency)),
                   setDepositAmount("");
               }
             }}

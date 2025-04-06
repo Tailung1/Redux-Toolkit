@@ -29,6 +29,7 @@ const customerSlice = createSlice({
       reducer(state, action: PayloadAction<createCustomerAction>) {
         state.fullName = action.payload.fullName;
         state.nationalID = action.payload.nationalID;
+        state.createdAT=new Date().toISOString()
       },
     },
     changeCustomerName(state, action: PayloadAction<string>) {

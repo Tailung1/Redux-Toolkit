@@ -100,6 +100,7 @@ export default function AccountOperations() {
         >
           <label htmlFor=''>Loan Amount</label>
           <input
+          value={loanAmount}
             type='number'
             onChange={(e) => setLoanAmount(+e.target.value)}
           />
@@ -114,6 +115,7 @@ export default function AccountOperations() {
           {" "}
           <label htmlFor=''>Loan Purpose</label>
           <input
+          value={loanPurpose}
             type='text'
             onChange={(e) => setLoanPurpose(e.target.value)}
           />

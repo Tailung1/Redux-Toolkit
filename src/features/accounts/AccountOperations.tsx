@@ -3,12 +3,17 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { AppDispatch, rootReducerType } from "../../store";
-import { depositAsync } from "./accountSlice";
-import { withdraw } from "./accountSlice";
-import { requestLoan } from "./accountSlice";
+import {
+  depositAsync,
+  payLoan,
+  withdraw,
+  requestLoan,
+} from "./accountSlice";
 
 export default function AccountOperations() {
-    const isLoading=useSelector((store:rootReducerType)=>store.account.isLoading)
+  const isLoading = useSelector(
+    (store: rootReducerType) => store.account.isLoading
+  );
   const dispatch = useDispatch<AppDispatch>();
   const [depositAmount, setDepositAmount] = useState<number | string>(
     ""
@@ -55,7 +60,7 @@ export default function AccountOperations() {
             />
           </div>
           <button
-        disabled={isLoading}
+            disabled={isLoading}
             onClick={() => {
               if (!depositAmount) {
                 return;
@@ -100,7 +105,7 @@ export default function AccountOperations() {
         >
           <label htmlFor=''>Loan Amount</label>
           <input
-          value={loanAmount}
+            value={loanAmount}
             type='number'
             onChange={(e) => setLoanAmount(+e.target.value)}
           />
@@ -115,13 +120,14 @@ export default function AccountOperations() {
           {" "}
           <label htmlFor=''>Loan Purpose</label>
           <input
-          value={loanPurpose}
+            value={loanPurpose}
             type='text'
             onChange={(e) => setLoanPurpose(e.target.value)}
           />
         </div>
         <button
           onClick={() => {
+            console.log();
             if (!loanAmount || !loanPurpose) {
               return;
             } else {
@@ -134,7 +140,7 @@ export default function AccountOperations() {
           Request Loan
         </button>
       </div>
-      <button>Pay loan</button>
+      <button onClick={() => dispatch(payLoan())}>pay Loan</button>
     </div>
   );
 }

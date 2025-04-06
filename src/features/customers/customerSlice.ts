@@ -16,6 +16,7 @@ const initialState: initialStateTypes = {
 interface createCustomerAction {
   fullName: string;
   nationalID: number;
+  createdAT: string;
 }
 
 const customerSlice = createSlice({
@@ -24,12 +25,18 @@ const customerSlice = createSlice({
   reducers: {
     createCustomer: {
       prepare(fullName, nationalID) {
-        return { payload: { fullName, nationalID } };
+        return {
+          payload: {
+            fullName,
+            nationalID,
+            createdAT: new Date().toISOString(),
+          },
+        };
       },
       reducer(state, action: PayloadAction<createCustomerAction>) {
         state.fullName = action.payload.fullName;
         state.nationalID = action.payload.nationalID;
-        state.createdAT=new Date().toISOString()
+        state.createdAT = action.payload.createdAT;
       },
     },
     changeCustomerName(state, action: PayloadAction<string>) {

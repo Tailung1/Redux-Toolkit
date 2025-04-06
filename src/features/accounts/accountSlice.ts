@@ -39,19 +39,19 @@ const accountSlice = createSlice({
       },
       reducer(state, action: PayloadAction<payLoadAction>) {
         if (state.loan > 1) return;
-        state.loan = action.payload.amount
-          state.loanPurpose = action.payload.purpose
-          console.log(state.loan)
-          console.log("request");
+        state.loan = action.payload.amount;
+        state.loanPurpose = action.payload.purpose;
+        console.log(state.loan);
+        console.log("request");
       },
     },
 
     payLoan(state) {
-        console.log(state.loan);
-        console.log("request");
+      console.log(state.loan);
+      console.log("request");
       if (state.loan > state.balance) return;
       state.balance -= state.loan;
-      state.loan=0;
+      state.loan = 0;
       state.loanPurpose = "";
     },
     convertingCurrency(state) {

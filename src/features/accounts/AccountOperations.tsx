@@ -10,7 +10,6 @@ import {
   requestLoan,
 } from "./accountSlice";
 
-
 export default function AccountOperations() {
   const isLoading = useSelector(
     (store: rootReducerType) => store.account.isLoading
@@ -20,7 +19,6 @@ export default function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState<number | string>(
     ""
   );
-  
   const [withdrawAmount, setWithdrawAmount] = useState<
     number | string
   >("");

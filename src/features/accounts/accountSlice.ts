@@ -46,6 +46,7 @@ const accountSlice = createSlice({
       },
     },
 
+    
     payLoan(state) {
       console.log(state.loan);
       console.log("request");

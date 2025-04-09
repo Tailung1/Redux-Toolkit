@@ -118,7 +118,6 @@ export default function AccountOperations() {
             alignItems: "center",
           }}
         >
-          {" "}
           <label htmlFor=''>Loan Purpose</label>
           <input
             value={loanPurpose}
